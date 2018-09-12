@@ -31,12 +31,18 @@ $aluno->insert();
 
 echo $aluno;
 */
-
+/* Update de Aluno
 $aluno = new Usuario();
 $aluno->loadById(8);
 $aluno->update("Adenilson", "BichonaLoa");
 echo "<pre>";
 echo $aluno;
 echo "<pre>";
-
+*/
+$aluno = new Usuario();
+$aluno->loadById(1);
+$aluno->delete();
+echo "<pre>";
+echo $aluno;
+echo "<pre>";
 

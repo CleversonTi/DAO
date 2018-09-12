@@ -7,8 +7,8 @@
 
 		public function __construct($login = "", $senha  = "")
 		{
-			$this->SetDesLogin($login); 
-			$this->SetDessenha($senha);
+			$this->setDeslogin($login); 
+			$this->setDessenha($senha);
 			
 		}
 
@@ -17,7 +17,7 @@
 			return $this->idUsuario;
 		}
 
-		public function SetIdUsuario($idUsuario)
+		public function setIdUsuario($idUsuario)
 		{
 			$this->idUsuario = $idUsuario;
 		}
@@ -27,7 +27,7 @@
 			return $this->deslogin;
 		}
 
-		public function SetDeslogin($deslogin)
+		public function setDeslogin($deslogin)
 		{
 			$this->deslogin = $deslogin;
 		}
@@ -37,17 +37,17 @@
 			return $this->dessenha;
 		}
 
-		public function SetDessenha($dessenha)
+		public function setDessenha($dessenha)
 		{
 			$this->dessenha = $dessenha;
 		}
 
-		public function getDtcadastro()
+		public function getDtCadastro()
 		{
 			return $this->dtcadastro;
 		}
 
-		public function SetDtcadastro($dtcadastro)
+		public function setDtCadastro($dtcadastro)
 		{
 			$this->dtcadastro = $dtcadastro;
 		}
@@ -102,10 +102,10 @@
 		}
 
 		public function setData($dados){
-			$this->SetIdUsuario($dados['idusuario']);
-			$this->SetDeslogin($dados['desclogin']);
-			$this->SetDessenha($dados['dessenha']);
-			$this->SetDtcadastro(new DateTime($dados['dtcadastro']));
+			$this->setIdUsuario($dados['idusuario']);
+			$this->setDeslogin($dados['desclogin']);
+			$this->setDessenha($dados['dessenha']);
+			$this->setDtCadastro(new DateTime($dados['dtcadastro']));
 		}
 		public function insert()
 		{
@@ -124,10 +124,23 @@
 			}
 		}
 
+		public function delete()
+		{
+			$sql = new Sql();
+			$sql->query("DELETE FROM tb_Usuario WHERE idusuario = :ID", array(
+				':ID'=>$this->getIdUsuario()
+			));
+			$this->setIdUsuario(0);
+			$this->setDeslogin("");
+			$this->setDessenha("");
+			$this->setDtCadastro(new DateTime());
+
+		}
+
 		public function update($login, $pass){
 
-			$this->SetDeslogin($login);
-			$this->SetDessenha($pass);
+			$this->setDeslogin($login);
+			$this->setDessenha($pass);
 
 			$sql = new Sql();
 			$sql->query("UPDATE tb_Usuario set desclogin = :LOGIN, dessenha = :PASS WHERE idusuario = :ID ", array
@@ -145,7 +158,7 @@
 				"idusuario"=>$this->getIdUsuario(),
 				"deslogin"=>$this->getDeslogin(),
 				"dessenha"=>$this->getDessenha(),
-				"dtcadastro"=>$this->getDtcadastro()->format("d/m/Y H:i:s")
+				"dtcadastro"=>$this->getDtCadastro()->format("d/m/Y H:i:s")
 			));
 		}
 
