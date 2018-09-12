@@ -34,7 +34,7 @@ echo $aluno;
 
 $aluno = new Usuario();
 $aluno->loadById(8);
-$aluno->update("Nates", "171nervoso");
+$aluno->update("Adenilson", "BichonaLoa");
 echo "<pre>";
 echo $aluno;
 echo "<pre>";
